@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/C0d3-5t3w/go-extendedGoCompiler/internal/config"
+	"github.com/C0d3-5t3w/GTS/internal/config"
 )
 
 type ExtendedCompiler struct {

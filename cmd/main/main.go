@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/C0d3-5t3w/go-extendedGoCompiler/internal/config"
-	"github.com/C0d3-5t3w/go-extendedGoCompiler/pkg/compiler"
+	"github.com/C0d3-5t3w/GTS/internal/config"
+	"github.com/C0d3-5t3w/GTS/pkg/compiler"
 )
 
 var (
@@ -81,5 +81,5 @@ Usage: %s [options] [build flags] [packages]
 Options:
 `, os.Args[0])
 	flag.PrintDefaults()
-	fmt.Println("\nFor more information, visit: https://github.com/brandonstewart/go-extendedGoCompiler")
+	fmt.Println("\nFor more information, visit: https://github.com/brandonstewart/GTS")
 }

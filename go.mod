@@ -1,4 +1,4 @@
-module github.com/C0d3-5t3w/go-extendedGoCompiler
+module github.com/C0d3-5t3w/GTS
 
 go 1.24.2
 
