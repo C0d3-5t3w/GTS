@@ -1,4 +1,4 @@
-BINARY_NAME=extendedgo
+BINARY_NAME=GTS
 BUILD_DIR=./bin
 CONFIG_PATH=./pkg/config/config.yaml
 GO=go
@@ -25,7 +25,6 @@ test:
 
 .PHONY: clean
 clean:
-	$(GO_CLEAN)
 	rm -rf $(BUILD_DIR)
 	rm -rf ./dist
 
