@@ -1,0 +1,11 @@
+typescript:
+  options:
+    - "--sourceMap"
+    - "--incremental"
+scss:
+  options:
+    - "--style=expanded"
+    - "--source-map"
+debugMode: true
+outputOptions:
+  verboseOutput: true

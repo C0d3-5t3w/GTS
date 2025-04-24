@@ -1,0 +1,25 @@
+goCompilerPath: "go"
+defaultFlags:
+  - "-gcflags=all=-N -l"
+
+typescript:
+  enabled: true
+  tscPath: "tsc"
+  srcDir: "./web/src/ts"
+  outDir: "./web/dist/js"
+  options:
+    - "--strict"
+    - "--sourceMap"
+
+scss:
+  enabled: true
+  sassPath: "sass"
+  srcDir: "./web/src/scss"
+  outDir: "./web/dist/css"
+  options:
+    - "--style=compressed"
+    - "--source-map"
+
+outputOptions:
+  directory: "./bin"
+  verboseOutput: true

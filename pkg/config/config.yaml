@@ -1,0 +1,59 @@
+goCompilerPath: "go"
+defaultFlags:
+  - "-gcflags=all=-N -l"
+
+extensions:
+  - "custom-import"
+  - "enhanced-generics"
+  - "code-contracts"
+
+customPasses:
+  - name: "preBuild"
+    type: "pre"
+    command: "go"
+    args: ["vet", "./..."]
+    enabled: true
+
+  - name: "staticAnalysis"
+    type: "pre"
+    command: "golangci-lint"
+    args: ["run"]
+    enabled: false
+
+  - name: "customTypeCheck"
+    type: "replace"
+    command: "internal/typecheck"
+    args: []
+    enabled: false
+
+outputOptions:
+  directory: "./bin"
+  verboseOutput: false
+  generateReports: true
+
+debugMode: false
+
+envVars:
+  CGO_ENABLED: "0"
+  GO111MODULE: "on"
+
+typescript:
+  enabled: true
+  tscPath: "tsc"
+  srcDir: "./src/ts"
+  outDir: "./dist/js"
+  options:
+    - "--strict"
+    - "--sourceMap"
+    - "--target ES2020"
+    - "--moduleResolution node"
+
+scss:
+  enabled: true
+  sassPath: "sass"
+  srcDir: "./src/scss"
+  outDir: "./dist/css"
+  options:
+    - "--style=compressed"
+    - "--source-map"
+    - "--update"

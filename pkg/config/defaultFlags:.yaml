@@ -1,0 +1,10 @@
+defaultFlags:
+  - "-ldflags=-w -s"
+typescript:
+  options:
+    - "--strict"
+    - "--minify"
+scss:
+  options:
+    - "--style=compressed"
+    - "--no-source-map"
