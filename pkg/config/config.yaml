@@ -40,8 +40,8 @@ envVars:
 typescript:
   enabled: true
   tscPath: "tsc"
-  srcDir: "./src/ts"
-  outDir: "./dist/js"
+  srcDir: "./pkg/web/assets/ts"
+  outDir: "./pkg/web/assets/js"
   options:
     - "--strict"
     - "--sourceMap"
@@ -51,8 +51,8 @@ typescript:
 scss:
   enabled: true
   sassPath: "sass"
-  srcDir: "./src/scss"
-  outDir: "./dist/css"
+  srcDir: "./pkg/web/assets/scss"
+  outDir: "./pkg/web/assets/css"
   options:
     - "--style=compressed"
     - "--source-map"
