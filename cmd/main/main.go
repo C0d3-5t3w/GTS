@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/C0d3-5t3w/GTS/internal/compiler"
 	"github.com/C0d3-5t3w/GTS/internal/config"
-	"github.com/C0d3-5t3w/GTS/pkg/compiler"
 )
 
 var (

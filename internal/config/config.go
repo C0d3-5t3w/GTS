@@ -90,8 +90,8 @@ func LoadConfig(configPath string) (*CompilerConfig, error) {
 
 func DefaultConfigPath() string {
 
-	if _, err := os.Stat("./pkg/config/config.yaml"); err == nil {
-		return "./pkg/config/config.yaml"
+	if _, err := os.Stat("./GTS/config/config.yaml"); err == nil {
+		return "./GTS/config/config.yaml"
 	}
 
 	defaultPath := filepath.Join(os.Getenv("HOME"), ".GTS", "config.yaml")

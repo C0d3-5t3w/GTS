@@ -1,11 +1,11 @@
 BINARY_NAME=GTS
-BUILD_DIR=./bin
-CONFIG_PATH=./pkg/config/config.yaml
+BUILD_DIR=./GTS
+CONFIG_PATH=./GTS/config/config.yaml
 GO=go
 GO_BUILD=$(GO) build
 GO_TEST=$(GO) test
 GO_CLEAN=$(GO) clean
-EXT_GO=$(BUILD_DIR)/$(BINARY_NAME)
+GTS=$(BUILD_DIR)/$(BINARY_NAME)
 
 .PHONY: all
 all: build
@@ -13,11 +13,12 @@ all: build
 .PHONY: build
 build:
 	mkdir -p $(BUILD_DIR)
+	cp -r ./pkg/config $(BUILD_DIR)
 	$(GO_BUILD) -o $(BUILD_DIR)/$(BINARY_NAME) ./cmd/main
 
 .PHONY: run
-run: build
-	$(EXT_GO) --config $(CONFIG_PATH) ./...
+run: 
+	$(GTS) --config $(CONFIG_PATH) ./...
 
 .PHONY: test
 test:
@@ -28,33 +29,33 @@ clean:
 	rm -rf $(BUILD_DIR)
 	rm -rf ./dist
 
-.PHONY: project-build
-project-build: build
-	$(EXT_GO) --config $(CONFIG_PATH) ./...
+.PHONY: project-run
+project-run: 
+	$(GTS) --config $(CONFIG_PATH) ./...
 
-.PHONY: project-build-verbose
-project-build-verbose: build
-	$(EXT_GO) --config $(CONFIG_PATH) --verbose ./...
+.PHONY: project-run-verbose
+project-run-verbose: 
+	$(GTS) --config $(CONFIG_PATH) --verbose ./...
 
-.PHONY: build-skip-ts
-build-skip-ts: build
-	$(EXT_GO) --config $(CONFIG_PATH) --skip-ts ./...
+.PHONY: run-skip-ts
+run-skip-ts: 
+	$(GTS) --config $(CONFIG_PATH) --skip-ts ./...
 
-.PHONY: build-skip-scss
-build-skip-scss: build
-	$(EXT_GO) --config $(CONFIG_PATH) --skip-scss ./...
+.PHONY: run-skip-scss
+run-skip-scss: 
+	$(GTS) --config $(CONFIG_PATH) --skip-scss ./...
 
-.PHONY: build-skip-php
-build-skip-php: build
-	$(EXT_GO) --config $(CONFIG_PATH) --skip-php ./...
+.PHONY: run-skip-php
+run-skip-php: 
+	$(GTS) --config $(CONFIG_PATH) --skip-php ./...
 
 .PHONY: php-to-html
-php-to-html: build
-	$(EXT_GO) --config $(CONFIG_PATH) --skip-ts --skip-scss ./...
+php-to-html: 
+	$(GTS) --config $(CONFIG_PATH) --skip-ts --skip-scss ./...
 
-.PHONY: build-custom-output
-build-custom-output: build
-	$(EXT_GO) --config $(CONFIG_PATH) -o $(BUILD_DIR)/output ./...
+.PHONY: run-custom-output
+run-custom-output: 
+	$(GTS) --config $(CONFIG_PATH) -o $(BUILD_DIR)/output ./...
 
 .PHONY: install
 install: build
@@ -64,15 +65,15 @@ install: build
 .PHONY: help
 help:
 	@echo "Make targets for the Extended Go Compiler:"
-	@echo "  build                  Build the compiler"
-	@echo "  run                    Run the compiler with default config"
-	@echo "  test                   Run tests"
-	@echo "  clean                  Clean build artifacts"
-	@echo "  project-build          Build a project with the extended compiler"
-	@echo "  project-build-verbose  Build with verbose output"
-	@echo "  build-skip-ts          Build without TypeScript compilation"
-	@echo "  build-skip-scss        Build without SCSS compilation"
-	@echo "  build-skip-php         Build without PHP to HTML conversion"
-	@echo "  php-to-html            Only convert PHP to HTML"
-	@echo "  build-custom-output    Build with custom output location"
-	@echo "  install                Install the compiler to GOPATH/bin"
+	@echo "  build               -   Build the compiler"
+	@echo "  run                 -   Run the compiler with default config"
+	@echo "  test                -   Run tests"
+	@echo "  clean               -   Clean build artifacts"
+	@echo "  project-run         -   run a project with the extended compiler"
+	@echo "  project-run-verbose -   run with verbose output"
+	@echo "  run-skip-ts         -   run without TypeScript compilation"
+	@echo "  run-skip-scss       -   run without SCSS compilation"
+	@echo "  run-skip-php        -   run without PHP to HTML conversion"
+	@echo "  php-to-html         -   Only convert PHP to HTML"
+	@echo "  run-custom-output   -   run with custom output location"
+	@echo "  install             -   Install the compiler to GOPATH/bin"
