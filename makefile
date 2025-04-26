@@ -44,6 +44,14 @@ build-skip-ts: build
 build-skip-scss: build
 	$(EXT_GO) --config $(CONFIG_PATH) --skip-scss ./...
 
+.PHONY: build-skip-php
+build-skip-php: build
+	$(EXT_GO) --config $(CONFIG_PATH) --skip-php ./...
+
+.PHONY: php-to-html
+php-to-html: build
+	$(EXT_GO) --config $(CONFIG_PATH) --skip-ts --skip-scss ./...
+
 .PHONY: build-custom-output
 build-custom-output: build
 	$(EXT_GO) --config $(CONFIG_PATH) -o $(BUILD_DIR)/output ./...
@@ -64,5 +72,7 @@ help:
 	@echo "  project-build-verbose  Build with verbose output"
 	@echo "  build-skip-ts          Build without TypeScript compilation"
 	@echo "  build-skip-scss        Build without SCSS compilation"
+	@echo "  build-skip-php         Build without PHP to HTML conversion"
+	@echo "  php-to-html            Only convert PHP to HTML"
 	@echo "  build-custom-output    Build with custom output location"
 	@echo "  install                Install the compiler to GOPATH/bin"

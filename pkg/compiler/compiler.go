@@ -58,6 +58,12 @@ func (c *ExtendedCompiler) Compile(args []string) error {
 		}
 	}
 
+	if c.config.PHP.Enabled {
+		if err := c.ConvertPHPToHTML(); err != nil {
+			return fmt.Errorf("PHP to HTML conversion failed: %w", err)
+		}
+	}
+
 	extendedArgs := c.applyExtensions(args)
 
 	for _, flag := range c.config.DefaultFlags {
@@ -203,4 +209,40 @@ func isCommand(args []string) bool {
 		}
 	}
 	return false
+}
+
+func (c *ExtendedCompiler) ConvertPHPToHTML() error {
+	if c.config.OutputOptions.VerboseOutput {
+		fmt.Println("Converting PHP files to HTML...")
+	}
+
+	for _, dir := range c.config.PHP.SrcDirs {
+		if err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if !info.IsDir() && strings.HasSuffix(path, ".php") {
+				outputPath := strings.TrimSuffix(path, ".php") + ".html"
+
+				if c.config.OutputOptions.VerboseOutput {
+					fmt.Printf("Converting %s to %s\n", path, outputPath)
+				}
+
+				cmd := exec.Command(c.config.PHP.PhpPath, append(c.config.PHP.Options, path)...)
+				output, err := cmd.Output()
+				if err != nil {
+					return fmt.Errorf("PHP conversion failed for %s: %w", path, err)
+				}
+
+				if err := os.WriteFile(outputPath, output, 0644); err != nil {
+					return fmt.Errorf("failed to write HTML file %s: %w", outputPath, err)
+				}
+			}
+			return nil
+		}); err != nil {
+			return fmt.Errorf("PHP to HTML conversion failed: %w", err)
+		}
+	}
+
+	return nil
 }

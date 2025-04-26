@@ -15,6 +15,7 @@ var (
 	output     = flag.String("o", "", "Output path for compiled binary")
 	skipTS     = flag.Bool("skip-ts", false, "Skip TypeScript compilation")
 	skipSCSS   = flag.Bool("skip-scss", false, "Skip SCSS compilation")
+	skipPHP    = flag.Bool("skip-php", false, "Skip PHP to HTML conversion")
 )
 
 func main() {
@@ -51,6 +52,9 @@ func main() {
 	}
 	if *skipSCSS {
 		cfg.SCSS.Enabled = false
+	}
+	if *skipPHP {
+		cfg.PHP.Enabled = false
 	}
 
 	compiler := compiler.NewExtendedCompiler(cfg)

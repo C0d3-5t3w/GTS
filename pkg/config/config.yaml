@@ -59,3 +59,11 @@ scss:
     - "--style=compressed"
     - "--source-map"
     - "--update"
+
+php:
+  enabled: true
+  phpPath: "php"
+  srcDirs:
+    - "./pkg/pages"
+    - "./"
+  options: []

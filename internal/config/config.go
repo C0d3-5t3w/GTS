@@ -18,6 +18,7 @@ type CompilerConfig struct {
 	EnvVars        map[string]string `yaml:"envVars"`
 	TypeScript     TypeScriptConfig  `yaml:"typescript"`
 	SCSS           SCSSConfig        `yaml:"scss"`
+	PHP            PHPConfig         `yaml:"php"`
 }
 
 type CompilerPass struct {
@@ -50,6 +51,13 @@ type SCSSConfig struct {
 	Options  []string `yaml:"options"`
 }
 
+type PHPConfig struct {
+	Enabled bool     `yaml:"enabled"`
+	PhpPath string   `yaml:"phpPath"`
+	SrcDirs []string `yaml:"srcDirs"`
+	Options []string `yaml:"options"`
+}
+
 func LoadConfig(configPath string) (*CompilerConfig, error) {
 	data, err := ioutil.ReadFile(configPath)
 	if err != nil {
@@ -71,6 +79,10 @@ func LoadConfig(configPath string) (*CompilerConfig, error) {
 
 	if config.SCSS.SassPath == "" {
 		config.SCSS.SassPath = "sass"
+	}
+
+	if config.PHP.PhpPath == "" {
+		config.PHP.PhpPath = "php"
 	}
 
 	return &config, nil
